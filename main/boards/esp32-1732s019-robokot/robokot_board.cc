@@ -5,6 +5,7 @@
 #include "application.h"
 #include "button.h"
 #include "config.h"
+#include "display/lvgl_display/lvgl_theme.h"
 
 #include <esp_log.h>
 #include <esp_lcd_panel_vendor.h>
@@ -13,6 +14,22 @@
 #include <driver/spi_common.h>
 
 #define TAG "RoboKotBoard"
+
+// Display with dark theme so the black-background cat-eye GIFs blend in
+class RoboKotDisplay : public SpiLcdDisplay {
+public:
+    using SpiLcdDisplay::SpiLcdDisplay;
+    virtual void SetupUI() override {
+        if (setup_ui_called_) {
+            return;
+        }
+        SpiLcdDisplay::SetupUI();
+        auto* dark_theme = LvglThemeManager::GetInstance().GetTheme("dark");
+        if (dark_theme != nullptr) {
+            SetTheme(dark_theme);
+        }
+    }
+};
 
 class RoboKotBoard : public WifiBoard {
 private:
@@ -55,7 +72,7 @@ private:
         esp_lcd_panel_swap_xy(panel, DISPLAY_SWAP_XY);
         esp_lcd_panel_mirror(panel, DISPLAY_MIRROR_X, DISPLAY_MIRROR_Y);
 
-        display_ = new SpiLcdDisplay(panel_io, panel,
+        display_ = new RoboKotDisplay(panel_io, panel,
             DISPLAY_WIDTH, DISPLAY_HEIGHT, DISPLAY_OFFSET_X, DISPLAY_OFFSET_Y,
             DISPLAY_MIRROR_X, DISPLAY_MIRROR_Y, DISPLAY_SWAP_XY);
     }
