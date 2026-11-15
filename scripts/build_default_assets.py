@@ -862,6 +862,16 @@ def get_emoji_collection_path(default_emoji_collection, noto_fonts_path, project
     if not default_emoji_collection:
         return None
     
+    # Board-local emoji collection: "board:<board_dir>/<subdir>" (PNG/GIF files)
+    if default_emoji_collection.startswith('board:'):
+        if project_root:
+            board_path = os.path.join(project_root, 'main', 'boards',
+                                      default_emoji_collection[len('board:'):])
+            if os.path.isdir(board_path):
+                return board_path
+            print(f"Warning: board emoji collection directory not found: {board_path}")
+        return None
+
     # Special handling for otto-gif collection
     if default_emoji_collection == 'otto-gif':
         if project_root:
