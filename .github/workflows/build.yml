@@ -95,6 +95,10 @@ jobs:
           if [[ "$BUILD_OPTIONS_JSON" != "null" && -n "$BUILD_OPTIONS_JSON" ]]; then
             OPTIONS+=(--build-options-json "$BUILD_OPTIONS_JSON")
           fi
+          # RoboKot: Russian UI and "Hi, miao-miao" wake word
+          if [[ "$BOARD" == "esp32-1732s019-robokot" ]]; then
+            OPTIONS+=(--language ru-RU --wake-word wn9_himiaomiao_tts)
+          fi
           python scripts/build.py "$BOARD" --name "$VARIANT" "${OPTIONS[@]}"
 
       - name: Upload artifacts
