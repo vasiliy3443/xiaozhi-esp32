@@ -29,12 +29,12 @@
 #define DISPLAY_BACKLIGHT_PIN GPIO_NUM_14
 #define DISPLAY_BACKLIGHT_OUTPUT_INVERT false
 
-// Landscape 320x170
+// Landscape 320x170 (rotated 180: buttons/USB on the left)
 #define DISPLAY_WIDTH   320
 #define DISPLAY_HEIGHT  170
 #define DISPLAY_SWAP_XY  true
-#define DISPLAY_MIRROR_X true
-#define DISPLAY_MIRROR_Y false
+#define DISPLAY_MIRROR_X false
+#define DISPLAY_MIRROR_Y true
 #define DISPLAY_INVERT_COLOR    true
 #define DISPLAY_RGB_ORDER  LCD_RGB_ELEMENT_ORDER_RGB
 #define DISPLAY_OFFSET_X  0
