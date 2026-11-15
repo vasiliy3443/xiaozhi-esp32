@@ -1,0 +1,44 @@
+#ifndef _BOARD_CONFIG_H_
+#define _BOARD_CONFIG_H_
+
+// ESP32-1732S019 (ESP32-S3 N16R8 + 1.9" ST7789 170x320) - "RoboKot"
+// INMP441 mic + MAX98357A amp, same audio wiring as bread-compact-wifi
+
+#include <driver/gpio.h>
+
+#define AUDIO_INPUT_SAMPLE_RATE  16000
+#define AUDIO_OUTPUT_SAMPLE_RATE 24000
+
+#define AUDIO_I2S_METHOD_SIMPLEX
+
+#define AUDIO_I2S_MIC_GPIO_WS   GPIO_NUM_4
+#define AUDIO_I2S_MIC_GPIO_SCK  GPIO_NUM_5
+#define AUDIO_I2S_MIC_GPIO_DIN  GPIO_NUM_6
+#define AUDIO_I2S_SPK_GPIO_DOUT GPIO_NUM_7
+#define AUDIO_I2S_SPK_GPIO_BCLK GPIO_NUM_15
+#define AUDIO_I2S_SPK_GPIO_LRCK GPIO_NUM_16
+
+#define BOOT_BUTTON_GPIO        GPIO_NUM_0
+
+// Built-in display (fixed wiring on the board)
+#define DISPLAY_MOSI_PIN      GPIO_NUM_13
+#define DISPLAY_CLK_PIN       GPIO_NUM_12
+#define DISPLAY_CS_PIN        GPIO_NUM_10
+#define DISPLAY_DC_PIN        GPIO_NUM_11
+#define DISPLAY_RST_PIN       GPIO_NUM_1
+#define DISPLAY_BACKLIGHT_PIN GPIO_NUM_14
+#define DISPLAY_BACKLIGHT_OUTPUT_INVERT false
+
+// Landscape 320x170
+#define DISPLAY_WIDTH   320
+#define DISPLAY_HEIGHT  170
+#define DISPLAY_SWAP_XY  true
+#define DISPLAY_MIRROR_X true
+#define DISPLAY_MIRROR_Y false
+#define DISPLAY_INVERT_COLOR    true
+#define DISPLAY_RGB_ORDER  LCD_RGB_ELEMENT_ORDER_RGB
+#define DISPLAY_OFFSET_X  0
+#define DISPLAY_OFFSET_Y  35
+#define DISPLAY_SPI_MODE 0
+
+#endif // _BOARD_CONFIG_H_
